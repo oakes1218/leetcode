@@ -345,3 +345,25 @@ func rotate(matrix [][]int) {
 
 	copy(matrix, newMatrix)
 }
+
+//Kids With the Greatest Number of Candies
+func kidsWithCandies(candies []int, extraCandies int) []bool {
+    result := make([]bool,0)
+    extr := make([]int, 0)
+    for _, v := range candies {
+        extr = append (extr, v + extraCandies)
+    }
+
+    for _, v := range extr {
+        var b bool
+        b = true
+        for _, v1 := range candies {
+            if v < v1 {
+                b = false
+            }
+        }
+        result = append(result, b)
+    }
+
+    return result
+}

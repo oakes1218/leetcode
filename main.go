@@ -208,3 +208,52 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	}
 	return head.Next
 }
+
+//Given an integer array nums, return all the triplets [nums[i], nums[j], nums[k]] such that i != j, i != k, and j != k, and nums[i] + nums[j] + nums[k] == 0.
+func threeSum(nums []int) [][]int {
+	r := make([][]int, 0)
+	for i := 0; i <= len(nums); i++ {
+		if (i + 2) >= len(nums) {
+			break
+		}
+
+		for j := 0; j <= len(nums); j++ {
+			if (i + 2 + j) >= len(nums) {
+				break
+			}
+
+			for k := 0; k <= len(nums); k++ {
+				if (i + 2 + j + k) >= len(nums) {
+					break
+				}
+
+				t := make([]int, 0)
+				if nums[i]+nums[i+1+j]+nums[i+2+j+k] == 0 {
+					t = append(t, nums[i])
+					t = append(t, nums[i+1+j])
+					t = append(t, nums[i+2+j+k])
+				}
+
+				if len(t) == 0 {
+					continue
+				}
+
+				sort.Ints(t)
+				var n int
+				for _, v := range r {
+					sort.Ints(v)
+					if v[0] == t[0] && v[1] == t[1] && v[2] == t[2] {
+						n++
+					}
+				}
+
+				if n > 0 {
+					continue
+				}
+
+				r = append(r, t)
+			}
+		}
+	}
+	return r
+}
